@@ -1,0 +1,38 @@
+<template>
+   <section class="produto-container">
+    <div v-for="produto in produtos" :key="produto.id">
+      <img v-if="produto.fotos" :src="produto.fotos[0]" :alt="produto.fotos[0]">
+      <p class="precp">{{produto.preco}}</p>
+      <h2 class="titulo">{{produto.titulo}}</h2>
+      <p>{{produto.descricao}}</p>
+    </div>
+   </section>
+</template>
+
+<script>
+import {api} from '../services.js'
+
+export default {
+name:'ProdutoLista',
+data(){
+  return{
+    produtos:null
+  }
+},
+methods: {
+  getProdutos(){
+    api.get('/produto')
+   .then(response => {
+     this.produtos = response.data
+   }) 
+  }
+},
+created(){
+  this.getProdutos()
+}
+}
+</script>
+
+<style>
+
+</style>
