@@ -10,12 +10,12 @@ export default {
 name:'ProdutoBuscar',
 data(){
   return{
-    busca:'',
+    busca:'',//valor inicial do campo de busca
   }
 },
 methods:{
   buscarProdutos(){
-    this.$router.push({query:{ q: this.busca}})
+    this.$router.push({query:{ q: this.busca}})//valor da url com os dados da busca
   }
 }
 }

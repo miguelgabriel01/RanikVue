@@ -1,6 +1,7 @@
 <template>
    <section class="produto-container">
-     <div v-if="produtos && produtos.length > 0" class="produtos">
+     <transition mode="out-in">
+          <div v-if="produtos && produtos.length > 0" class="produtos" key="produtos">
        <div v-for="(produto,index) in produtos" :key="index" class="produto">
          <router-link to="/">
           <img v-if="produto.fotos" :src="produto.fotos[0]" :alt="produto.fotos[0]">
@@ -11,9 +12,13 @@
        </div>
        <produtos-paginar :produtosTotal="produtosTotal" :produtosPorPagina="produtosPorPagina"/>
      </div>
-      <div v-else-if="produtos && produtos.length == 0">
+      <div v-else-if="produtos && produtos.length == 0" key="sem-resultado">
         <p class="sem-resultado">Busca sem resultado. Tente buscar outro termo</p>
       </div>
+      <div v-else key="carregando">
+        <pagina-carregando />
+      </div>
+    </transition>
    </section>
 </template>
 
@@ -29,18 +34,21 @@ components:{
 },
 data(){
   return{
-    produtos:null,
-    produtosPorPagina:1,
-    produtosTotal:0
+    produtos:null,//valor inicial dos produtos
+    produtosPorPagina:9,//total de produtos por pagina
+    produtosTotal:0//valor de produtos que será usado no menu da paginação
   }
 },
 methods: {
   getProdutos(){
+    this.produtos = null
+    setTimeout(() =>{
     api.get(this.url)//usa como parametro a url para fazer a requisição com o axios
    .then(response => {
-    this.produtosTotal = Number(response.headers["x-total-count"])
-    this.produtos = response.data
-   }) 
+    this.produtosTotal = Number(response.headers["x-total-count"])//valor dos produtos que a api retornou
+    this.produtos = response.data//salvamos na variavel produtos, o valor da requiição
+   })       
+    },1000)
   }
 },
 computed:{

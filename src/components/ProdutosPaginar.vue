@@ -1,7 +1,5 @@
 <template>
   <div>
-  <p>Paginas {{paginasTotal}}</p>
-
      <ul>
        <li v-for="pagina in paginas" :key="pagina">
        <router-link :to="{query: query(pagina)}">{{pagina}}</router-link>
@@ -14,16 +12,19 @@
 export default {
 name:'ProdutosPaginar',
 props:{
+  //prop com o valor total de produtos por pagina
   produtosPorPagina:{
-    type:Number,
-    default:1
+    type:Number,//informamos o valor da prop é numero
+    default:1//informamos que o valor padrão é 1
   },
+  //prop com o valor total de produtos
   produtosTotal:{
-    type:Number,
-    default:1
+    type:Number,//imformaos que o valor da prop é tipo Number
+    default:1//informamos que o valor padrão é 1
   },
 },
   computed:{
+    //metodo computado para verificar a pag que o usuario estar e criar a logica do menu de paginação
     paginas(){
      const current = Number(this.$route.query._page);//verifica a pagina que o usuario esta
      const ranger = 9;//numero maximo de opções de paginação
