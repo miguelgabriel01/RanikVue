@@ -31,7 +31,9 @@ data(){
 },
 methods:{
   logar(){
-
+   this.$store.dispatch('getUsuario',this.login.email);
+   //informa onde o usuario deve ir nas rotas
+   this.$router.push("/usuario")
   }
 }
 }
