@@ -16,6 +16,14 @@ export const api = {
     return axiosInstace.post(endpoint, body);
   },
 
+  delete(endpoint){
+    return axiosInstace.delete(endpoint)
+  },
+
+  put(endpoint,body){
+    return axiosInstace.put(endpoint, body);
+  },
+
 }
   //api cep
   export function getCep(cep){

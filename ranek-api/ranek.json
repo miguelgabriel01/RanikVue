@@ -2,14 +2,15 @@
   "usuario": [
     {
       "id": "andre@origamid.com",
-      "email": "andre@origamid.com",
-      "nome": "André Rafael",
-      "senha": "123",
-      "rua": "Rua Ali Perto",
+      "nome": "miguel gabriel",
+      "email": "gabrielogabriel10@gmail.com",
+      "senha": "miguel123",
       "cep": "12345678",
+      "rua": "Rua Ali Perto",
       "numero": "25",
-      "estado": "RJ",
-      "cidade": "Rio de Janeiro"
+      "bairro": "Centro",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ"
     },
     {
       "id": "joao@origamid.com",
@@ -594,28 +595,12 @@
       "id": "aRAE1p1"
     },
     {
-      "nome": "Arma",
-      "preco": "555",
-      "descricao": "arma",
-      "fotos": null,
-      "usuario_id": "andre@origamid.com",
-      "id": "iS47uvC"
-    },
-    {
       "nome": "armaaa",
       "preco": "5567",
       "descricao": "ghjgjh",
       "fotos": null,
       "usuario_id": "andre@origamid.com",
       "id": "VZFCC5f"
-    },
-    {
-      "nome": "armaaa",
-      "preco": "5567",
-      "descricao": "ghjgjh",
-      "fotos": null,
-      "usuario_id": "andre@origamid.com",
-      "id": "eN8wXcg"
     }
   ]
 }

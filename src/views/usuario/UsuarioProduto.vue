@@ -7,6 +7,7 @@
       <li v-for="(produto,index) in usuario_produtos" :key="index">
          <produto-item :produto="produto">
            <p>{{produto.descricao}}</p>
+           <button class="deletar" @click="deletarProduto(produto.id)">Deletar</button>
          </produto-item>
       </li>
     </transition-group>
@@ -17,6 +18,7 @@
 import ProdutoAdicionar from '../../components/ProdutoAdicionar.vue'
 import ProdutoItem from '../../components/ProdutoItem.vue'
 import {mapState,mapActions} from  'vuex'
+import {api} from '../../services.js'
 
 export default {
 name:'UsuarioProduto',
@@ -30,7 +32,18 @@ computed:{
   ...mapState(["login", "usuario", "usuario_produtos"])
 },
 methods:{
-  ...mapActions(["getUsuarioProdutos"])
+  ...mapActions(["getUsuarioProdutos"]),
+  deletarProduto(id){
+    const confirmar = window.confirm("Deseja apagar este produto?")
+    if(confirmar){
+    api.delete(`/produto/${id}`)
+    .then(() => {
+      this.getUsuarioProdutos();
+    }).catch(error => {
+      console.log(error.response)
+    })
+    }
+  }
 },
 created(){
   if(this.login){
