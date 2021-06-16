@@ -19,7 +19,8 @@ strict:true,
       bairro: "",
       cidade: "",
       estado: "",
-    }
+    },
+    usuario_produtos:null,
   },
   mutations: {
     UPDATE_LOGIN(state,payload){
@@ -27,9 +28,21 @@ strict:true,
     },
     UPDATE_USUARIO(state,payload){
       state.usuario = Object.assign(state.usuario, payload);
-     } 
+    },
+    UPDATE_USUARIO_PRODUTOS(state,payload){
+      state.usuario_produtos = payload
+    }, 
+    ADD_USUARIO_PRODUTOS(state,payload){
+      state.usuario_produtos.unshift(payload)
+    } 
   },
   actions: {
+    getUsuarioProdutos(context){
+     api.get(`/produto?usuario_id=${context.state.usuario.id}`)
+     .then(response => {
+       context.commit("UPDATE_USUARIO_PRODUTOS", response.data)
+     })
+    },
     getUsuario(context,payload){
      return api.get(`/usuario/${payload}`)
      .then(response => {
@@ -46,7 +59,7 @@ strict:true,
     },
 
     deslogarUsuario(context){
-     context.commit("update_usuario",{
+     context.commit("UPDATE_USUARIO",{
       //apagamos seus dados do estado
       id: "",
       nome: "",
