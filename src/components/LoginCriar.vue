@@ -4,7 +4,7 @@
     <transition mode="out-in">
       <button v-if="!criar" class="btn" @click="criar = true">Criar Conta</button>
       <UsuarioForm v-else>
-        <button class="btn btn-for">Criar Usuário</button>  
+        <button class="btn btn-for" @click.prevent="criarUsuario">Criar Usuário</button>  
       </UsuarioForm>    
     </transition>
   </section>
@@ -18,6 +18,17 @@ components:{UsuarioForm},
 data(){
   return{
     criar: false
+  }
+},
+methods:{
+  async criarUsuario(){
+    try{
+    await this.$store.dispatch("criarUsuario",this.$store.state.usuario)
+    await this.$store.dispatch("getUsuario", this.$store.state.usuario.email)
+    this.$router.push('/usuario')
+    }catch(error){
+      console.log(error)
+    }
   }
 }
 }
